@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>รายชื่อนิสิต</title>
+    <!-- Link to Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    
+    <!-- Custom styles for this template -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Playfair&#43;Display:700,900&amp;display=swap"
+      rel="stylesheet"
+    />
+    <!-- Custom styles for this template -->
+    <link href="/css/blog.css" rel="stylesheet" />
+    <link
+      rel="canonical"
+      href="https://getbootstrap.com/docs/5.3/examples/blog/"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@docsearch/css@3"
+    />
+
+    <link
+      href="/css/bootstrap.min.css"
+      rel="stylesheet"
+      crossorigin="anonymous"
+    />
+
+    <!-- Favicons -->
+    <link
+      rel="apple-touch-icon"
+      href="/docs/5.3/assets/img/favicons/apple-touch-icon.png"
+      sizes="180x180"
+    />
+    <link
+      rel="icon"
+      href="/docs/5.3/assets/img/favicons/favicon-32x32.png"
+      sizes="32x32"
+      type="image/png"
+    />
+    <link
+      rel="icon"
+      href="/docs/5.3/assets/img/favicons/favicon-16x16.png"
+      sizes="16x16"
+      type="image/png"
+    />
+    <link rel="manifest" href="/docs/5.3/assets/img/favicons/manifest.json" />
+    <link
+      rel="mask-icon"
+      href="/docs/5.3/assets/img/favicons/safari-pinned-tab.svg"
+      color="#712cf9"
+    />
+    <link rel="icon" href="/docs/5.3/assets/img/favicons/favicon.ico" />
+
+    <meta name="theme-color" content="#712cf9" />
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+
+      .b-example-divider {
+        width: 100%;
+        height: 3rem;
+        background-color: rgba(0, 0, 0, 0.1);
+        border: solid rgba(0, 0, 0, 0.15);
+        border-width: 1px 0;
+        box-shadow: inset 0 0.5em 1.5em rgba(0, 0, 0, 0.1),
+          inset 0 0.125em 0.5em rgba(0, 0, 0, 0.15);
+      }
+
+      .b-example-vr {
+        flex-shrink: 0;
+        width: 1.5rem;
+        height: 100vh;
+      }
+
+      .bi {
+        vertical-align: -0.125em;
+        fill: currentColor;
+      }
+
+      .nav-scroller {
+        position: relative;
+        z-index: 2;
+        height: 2.75rem;
+        overflow-y: hidden;
+      }
+
+      .nav-scroller .nav {
+        display: flex;
+        flex-wrap: nowrap;
+        padding-bottom: 1rem;
+        margin-top: -1px;
+        overflow-x: auto;
+        text-align: center;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      
+    </style>
+  </head> 
+  <body>
+    <header class="border-bottom lh-1 py-3">
+      <div class="row flex-nowrap justify-content-between align-items-center">
+        <div class="col-4 pt-1">
+          <a class="link-secondary" href="#"></a>
+        </div>
+        <div class="col-4 text-center">
+          <a
+            class="blog-header-logo text-body-emphasis text-decoration-none"
+            href="/home"
+            >Attendance Recording</a
+          >
+        </div>
+        <div class="col-4 d-flex justify-content-end align-items-center">
+          <a class="link-secondary" href="#" aria-label="Search">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              class="mx-3"
+              role="img"
+              viewBox="0 0 24 24"
+            >
+              <title>Search</title>
+              <circle cx="10.5" cy="10.5" r="7.5" />
+              <path d="M21 21l-5.2-5.2" />
+            </svg>
+          </a>
+          <% if (loggedIn) { %>
+              <a class="btn btn-sm btn-danger" href="/logout">Logout</a>
+          <% } %>
+  
+          <% if (!loggedIn) { %>
+          <a class="btn btn-sm btn-outline-secondary mx-2" href="/login">Sign In</a>
+          <a class="btn btn-sm btn-outline-secondary" href="/register">Sign Up</a>
+          <% } %>
+        </div>
+      </div>
+    </header>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-2 bg-dark text-white p-4">
+          <div class="course-info">
+            <h5>รายละเอียดวิชา</h5>
+            <p><strong>ชื่อวิชา :</strong> <span id="courseName"></span></p>
+            <p><strong>รหัสวิชา :</strong> <span id="courseID"></span></p>
+            <p><strong>กลุ่มที่ :</strong> <span id="courseSection"></span></p>
+          </div>
+        </div>
+        <div class="col-md-10">
+          <h1 class="text-left ml-4">รายชื่อนิสิต</h1>
+          <div class="right-content">
+            <div class="table-responsive" style="max-height: 550px;">
+              <table class="table table-bordered" id="data-table">
+                <!-- Table headers and data will be added dynamically using JavaScript -->
+              </table>
+            </div>
+          </div>
+          <div class="text-right pr-4 pt-3">
+            <button type="button" class="btn btn-primary">
+              บันทึก
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+
+<script>
+  // Get the table element
+  const dataTable = document.getElementById('data-table');
+
+  const courseData = <%- JSON.stringify(courseData) %>;
+  
+  const courseName = courseData.name;
+  const courseID = courseData.id;
+  const courseSection = courseData.section;
+  
+  document.getElementById('courseName').innerText = courseName;
+  document.getElementById('courseID').innerText = courseID;
+  document.getElementById('courseSection').innerText = courseSection;
+  
+  // document.getElementById('courseName').innerText = name;
+  // document.getElementById('courseID').innerText = course_id;
+  // document.getElementById('courseSection').innerText = section;
+  const atdrecData = <%- JSON.stringify(mainData) %>;
+  console.log(atdrecData);
+  const jsonData = atdrecData.data;
+  const jsonDataHeader = {
+    'ลำดับที่': 0,
+    'รหัสนิสิต': 0,
+    'ชื่อ': 0,
+    'ภาควิชา': 0,
+    'บันทึกการเข้าชั้นเรียน': 0 // This represents the merged columns
+    // Add headers for other columns as needed
+  };
+
+  // Create table headers
+  const headerRow = dataTable.insertRow(0);
+  for (const key in jsonDataHeader) {
+      if (jsonDataHeader.hasOwnProperty(key)) {
+          const headerCell = document.createElement('th'); // Create a table header cell
+          headerCell.innerHTML = key;
+          if (key === 'บันทึกการเข้าชั้นเรียน') {
+              headerCell.colSpan = 19; // Number of columns to span (from ColumnI to ColumnAA)
+          }
+          headerRow.appendChild(headerCell);
+      }
+  }
+
+  // Create table rows with data
+  for (const record of jsonData) {
+      const row = dataTable.insertRow();
+      for (const key in record) {
+          if (record.hasOwnProperty(key)) {
+              const cell = row.insertCell();
+              cell.innerHTML = record[key];
+          }
+      }
+  }
+
+
+  document.querySelector('.btn-primary').addEventListener('click', async () => {
+    
+
+    // Construct the filename
+    const fileName = `${courseID}.json`;
+
+    try {
+      // Make a POST request to the server to save JSON data to the file
+      const response = await fetch('/api/saveDataToFile', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          fileName: fileName,
+          jsonData: atdrecData // Assuming jsonData is available
+        })
+      });
+
+      // Check if the request was successful
+      if (response.ok) {
+        console.log('Data saved successfully.');
+        redirectToDetailPage(courseData);
+      } else {
+        console.error('Failed to save data.');
+      }
+    } catch (error) {
+      console.error('Error occurred while saving data:', error);
+    }
+  });
+
+  function redirectToDetailPage(course) {
+          const queryParams = `?id=${course.id}&name=${course.name}&section=${course.section}`;
+          window.location.href = "/course/detail" + queryParams;
+      }
+</script>

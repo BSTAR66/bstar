@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <title>File Upload</title>
+   <!-- Include Bootstrap CSS -->
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+   <style>
+       /* CSS styles for the container */
+       .container {
+           display: flex;
+           flex-direction: row;
+           height: 100vh;
+       }
+
+       /* CSS styles for the left side box */
+       .left-box {
+           flex: 1;
+           padding: 20px;
+           text-align: left;
+           background-color: #837f7f;
+       }
+
+       /* CSS styles for the "Course Info" box */
+       .course-info {
+           background-color: blue; /* Blue background color */
+           color: #fff; /* White text color */
+           padding: 10px;
+           border-radius: 10px;
+           margin-bottom: 20px; /* Add space between Course Info and the content below */
+       }
+
+       /* CSS styles for the right content */
+       .right-content {
+           display: flex;
+           flex-direction: column;
+           justify-content: center; /* Center vertically within right-content */
+           align-items: center; /* Center horizontally within right-content */
+           flex: 3;
+       }
+
+       /* CSS styles for the form */
+       form {
+           display: flex;
+           flex-direction: column;
+       }
+   </style>
+</head>
+<body>
+   <div class="container">
+       <div class="left-box">
+           <div class="course-info">
+               <h2>รายละเอียดวิชา</h2>
+               <p><strong>ชื่อวิชา :</strong> ...</p>
+               <p><strong>รหัสวิชา :</strong> ...</p>
+               <p><strong>กลุ่มที่ :</strong> ...</p>
+           </div>
+       </div>
+       <div class="right-content">
+           <div style="text-align: center;">
+               <h1>อัปโหลดไฟล์ XLSX</h1>
+               <form action="/upload" method="POST" enctype="multipart/form-data">
+                    <input type="file" name="file" id="file" class="form-control">
+                    <input type="hidden" name="course_id" value="<%= course_id %>">
+                    <input type="hidden" name="course_name" value="<%= course_name %>">
+                    <input type="hidden" name="course_section" value="<%= course_section %>">
+                   <button type="submit" class="btn btn-primary" style="margin-top: 10px;">อัปโหลด</button>
+               </form>
+           </div>
+       </div>
+   </div>
+</body>
+</html>
